@@ -1,1 +1,1804 @@
-Hello World
+<html>
+<head>
+<title>비대면 API</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="container-lg px-3 my-5 markdown-body">
+
+
+      <h1 id="설비-보전-경험-지식-공유-플랫폼-api">설비 보전 경험 지식 공유 플랫폼 API</h1>
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+
+<h2 id="1-경험지식-요청-리스트-전체-조회">1. 경험지식 요청 리스트 전체 조회<a class="anchorjs-link " href="#1-경험지식-요청-리스트-전체-조회" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request">Request<a class="anchorjs-link " href="#request" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/getDataQnaListAll</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters">Parameters<a class="anchorjs-link " href="#parameters" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>keyword</td>
+      <td>String</td>
+      <td>검색어</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>industry_gubun</td>
+      <td>String</td>
+      <td>산업군</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>process_gubun</td>
+      <td>String</td>
+      <td>상세 공정</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>broken_sh</td>
+      <td>String</td>
+      <td>고장 상황</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>broken_hs</td>
+      <td>String</td>
+      <td>고장 현상</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response">Response<a class="anchorjs-link " href="#response" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>qna_list</td>
+      <td>요청글 목록</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>qna_idx</td>
+      <td>요청글 순번</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>usernm</td>
+      <td>작성자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>industry_gubun_name</td>
+      <td>산업군</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>process_gubun_name</td>
+      <td>상세공정</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>broken_sh_name</td>
+      <td>고장상황</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>broken_hs_name</td>
+      <td>고장현상</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>제목</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>content</td>
+      <td>내용</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>job_dt</td>
+      <td>작성일시</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>finish_yn</td>
+      <td>채택여부</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>reply_count</td>
+      <td>답변수</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getDataQnaListAll</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2"> eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">keyword</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">industry_gubun</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">process_gubun</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">broken_sh</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">broken_hs</span><span class="p">:</span> <span class="dl">''</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/getDataQnaListAll</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="2-경험지식-요청-글-상세-조회">2. 경험지식 요청 글 상세 조회<a class="anchorjs-link " href="#2-경험지식-요청-글-상세-조회" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-1">Request<a class="anchorjs-link " href="#request-1" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/getDataQnaReply</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-1">Parameters<a class="anchorjs-link " href="#parameters-1" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>qna_idx</td>
+      <td>String</td>
+      <td>요청 글 번호</td>
+      <td style="text-align: center">O</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-1">Response<a class="anchorjs-link " href="#response-1" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>industry_gubun_name</td>
+      <td>산업군</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>process_gubun_name</td>
+      <td>상세공정</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model</td>
+      <td>모델명</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model_com</td>
+      <td>모델제조사</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model_create_dt</td>
+      <td>제조일자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model_install_dt</td>
+      <td>설치일자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>broken_sh_name</td>
+      <td>고장상황</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>broken_hs_name</td>
+      <td>고장현상</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>제목</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>content</td>
+      <td>내용</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>job_dt</td>
+      <td>작성일시</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>finish_yn</td>
+      <td>채택여부</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>reply_count</td>
+      <td>답변수</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td><strong>fileList</strong></td>
+      <td><strong>첨부 파일 목록</strong></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>ata_org_name</td>
+      <td>파일 이름</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>ata_size</td>
+      <td>파일 크기</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>ata_path</td>
+      <td>다운로드 주소</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td><strong>replyList</strong></td>
+      <td><strong>답변 순번 목록</strong></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>reply_idx</td>
+      <td>답변 순번</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>content_reply</td>
+      <td>답변 내용</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>job_dt</td>
+      <td>답변 작성 일시</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>selected</td>
+      <td>채택 유무</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>usernm</td>
+      <td>답변 장성자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>user_gubun_name</td>
+      <td>답변자 구분</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td><strong>replyFileList</strong></td>
+      <td><strong>답변 첨부 파일 목록</strong></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>rata_org_name</td>
+      <td>파일 이름</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>rata_size</td>
+      <td>파일 크기</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>rata_path</td>
+      <td>다운로드 주소</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-1">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-1" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getDataQnaReply</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">qna_idx</span><span class="p">:</span> <span class="mi">34</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/getDataQnaReply</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>            
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="3-경험지식--요청-등록">3. 경험지식 – 요청 등록<a class="anchorjs-link " href="#3-경험지식--요청-등록" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-2">Request<a class="anchorjs-link " href="#request-2" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">POST https://{domain}/project9/insertDataQna_attach</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-2">Parameters<a class="anchorjs-link " href="#parameters-2" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>industry_gubun</td>
+      <td>String</td>
+      <td>산업군</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>process_gubun</td>
+      <td>String</td>
+      <td>상세 공정</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>broken_sh</td>
+      <td>String</td>
+      <td>고장 상황</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>broken_hs</td>
+      <td>String</td>
+      <td>고장 현상</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>model</td>
+      <td>String</td>
+      <td>모델명</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>model_com</td>
+      <td>String</td>
+      <td>모델제조사</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>model_create_dt</td>
+      <td>String</td>
+      <td>제조일자</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>model_install_dt</td>
+      <td>String</td>
+      <td>설치일자</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>mold_break_yn</td>
+      <td>String</td>
+      <td>금형파손여부</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>String</td>
+      <td>제목</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>content</td>
+      <td>String</td>
+      <td>내용</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>qna_attach</td>
+      <td>File</td>
+      <td>첨부파일</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-2">Response<a class="anchorjs-link " href="#response-2" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-2">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-2" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">insertDataQna_attach</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#form1</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/insertDataQna_attach</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">post</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">enctype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">multipart/form-data</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">processData</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">f</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>           
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="o">&lt;</span><span class="nx">form</span> <span class="nx">id</span><span class="o">=</span><span class="dl">"</span><span class="s2">form1</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">form1</span><span class="dl">"</span> <span class="nx">method</span><span class="o">=</span><span class="dl">"</span><span class="s2">post</span><span class="dl">"</span> <span class="nx">enctype</span><span class="o">=</span><span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span><span class="o">&gt;</span>   
+    <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">사용자</span> <span class="nx">토큰</span><span class="o">&lt;</span><span class="sr">/label&gt;  </span><span class="err"> 
+</span>    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">user_token</span><span class="dl">"</span> <span class="nx">value</span><span class="o">=</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+       eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+       iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="o">&gt;</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;산업군&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">industry_gubun</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;상세 공정&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">process_gubun</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;고장 상황&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">broken_sh</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;고장 현상&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">broken_hs</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;모델명&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">model</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;모델 제조사&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">model_com</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;제조 일자&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">date</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">model_create_dt</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;설치 일자&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">date</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">model_install_dt</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;금형파손여부&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">mold_break_yn</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;제목&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">text</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">title</span><span class="dl">"</span><span class="s2">&gt;&lt;br&gt;
+    &lt;label&gt;내용&lt;/label&gt;
+    &lt;textarea name=</span><span class="dl">"</span><span class="nx">content</span><span class="dl">"</span><span class="s2">&gt;&lt;/textarea&gt;&lt;br&gt;
+    &lt;label&gt;첨부파일&lt;/label&gt;
+    &lt;input type=</span><span class="dl">"</span><span class="nx">file</span><span class="dl">"</span><span class="s2"> name=</span><span class="dl">"</span><span class="nx">qna_attach</span><span class="dl">"</span><span class="s2"> multiple&gt;
+&lt;/form&gt;
+</span></code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="4-경험지식--경험-지식-수정">4. 경험지식 – 경험 지식 수정<a class="anchorjs-link " href="#4-경험지식--경험-지식-수정" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-3">Request<a class="anchorjs-link " href="#request-3" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/updateMyQna</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-3">Parameters<a class="anchorjs-link " href="#parameters-3" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>qna_idx</td>
+      <td>int</td>
+      <td>요청 글 번호</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>industry_gubun</td>
+      <td>int</td>
+      <td>산업군</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>process_gubun</td>
+      <td>int</td>
+      <td>상세 공정</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>model</td>
+      <td>String</td>
+      <td>모델명</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>model_com</td>
+      <td>String</td>
+      <td>모델제조사</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>model_create_dt</td>
+      <td>String</td>
+      <td>제조일자</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>model_install_dt</td>
+      <td>String</td>
+      <td>설치일자</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>mold_break_yn</td>
+      <td>String</td>
+      <td>금형파손여부</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>broken_sh</td>
+      <td>int</td>
+      <td>고장 상황</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>broken_hs</td>
+      <td>int</td>
+      <td>고장 현상</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>String</td>
+      <td>제목</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>content</td>
+      <td>String</td>
+      <td>내용</td>
+      <td style="text-align: center">O</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-3">Response<a class="anchorjs-link " href="#response-3" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-3">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-3" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">updateMyQna</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">qna_idx</span><span class="p">:</span> <span class="dl">'</span><span class="s1">61</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">industry_gubun</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">process_gubun</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">broken_sh</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">broken_hs</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">model</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ABC</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">model_com</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ABC</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">model_create_dt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2012-11-11</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">model_install_dt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2012-11-11</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">out_temp</span><span class="p">:</span> <span class="dl">'</span><span class="s1">20</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">out_hmdt</span><span class="p">:</span> <span class="dl">'</span><span class="s1">30</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">mold_break_yn</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">오일받이 누수</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">content</span><span class="p">:</span> <span class="dl">'</span><span class="s1"> 바닥이 지저분해요</span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/updateMyQna</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>           
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="5-경험지식--답변-등록">5. 경험지식 – 답변 등록<a class="anchorjs-link " href="#5-경험지식--답변-등록" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-4">Request<a class="anchorjs-link " href="#request-4" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">POST https://{domain}/project9/insertDataReply_attach</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-4">Parameters<a class="anchorjs-link " href="#parameters-4" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>qna_idx</td>
+      <td>String</td>
+      <td>요청글 번호</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>content_reply</td>
+      <td>String</td>
+      <td>답변 내용</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>reply_attach</td>
+      <td>File</td>
+      <td>첨부파일</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-4">Response<a class="anchorjs-link " href="#response-4" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-4">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-4" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">insertDataReply_attach</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#form2</span><span class="dl">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/insertDataReply_attach</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">enctype</span><span class="p">:</span> <span class="dl">'</span><span class="s1">multipart/form-data</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">processData</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">f</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="o">&lt;</span><span class="nx">form</span> <span class="nx">id</span><span class="o">=</span><span class="dl">"</span><span class="s2">form2</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">form2</span><span class="dl">"</span> <span class="nx">method</span><span class="o">=</span><span class="dl">"</span><span class="s2">post</span><span class="dl">"</span> <span class="nx">enctype</span><span class="o">=</span><span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">사용자</span> <span class="nx">토큰</span><span class="o">&lt;</span><span class="sr">/label&gt;  </span><span class="err"> 
+</span>    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">user_token</span><span class="dl">"</span> <span class="nx">value</span><span class="o">=</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+    eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+    iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">요청글</span> <span class="nx">순번</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">qna_idx</span><span class="dl">"</span> <span class="nx">value</span><span class="o">=</span><span class="dl">"</span><span class="s2">73</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="nx">br</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">내용</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">textarea</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">content_reply</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/textarea&gt;&lt;br</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">첨부파일</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">file</span><span class="dl">"</span> <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">reply_attach</span><span class="dl">"</span> <span class="nx">multiple</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="6-경험지식--답변-수정">6. 경험지식 – 답변 수정<a class="anchorjs-link " href="#6-경험지식--답변-수정" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-5">Request<a class="anchorjs-link " href="#request-5" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/updateDataReply</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-5">Parameters<a class="anchorjs-link " href="#parameters-5" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>reply_idx</td>
+      <td>String</td>
+      <td>답변 번호</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>content_reply</td>
+      <td>String</td>
+      <td>답변 내용</td>
+      <td style="text-align: center">O</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-5">Response<a class="anchorjs-link " href="#response-5" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-5">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-5" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">updateDataReply</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">reply_idx</span><span class="p">:</span> <span class="mi">59</span><span class="p">,</span>
+        <span class="na">content_reply</span><span class="p">:</span> <span class="dl">'</span><span class="s1">수정 내용</span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/updateDataReply</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="7-경험지식--답변-삭제">7. 경험지식 – 답변 삭제<a class="anchorjs-link " href="#7-경험지식--답변-삭제" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-6">Request<a class="anchorjs-link " href="#request-6" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/deleteDataReply</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-6">Parameters<a class="anchorjs-link " href="#parameters-6" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>reply_idx</td>
+      <td>String</td>
+      <td>답변 번호</td>
+      <td style="text-align: center">O</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-6">Response<a class="anchorjs-link " href="#response-6" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-6">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-6" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">deleteDataReply</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">reply_idx</span><span class="p">:</span> <span class="mi">60</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/deleteDataReply</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="8-경험지식--나의-경험-지식-리스트-조회">8. 경험지식 – 나의 경험 지식 리스트 조회<a class="anchorjs-link " href="#8-경험지식--나의-경험-지식-리스트-조회" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-7">Request<a class="anchorjs-link " href="#request-7" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/getMyDataQnaList</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-7">Parameters<a class="anchorjs-link " href="#parameters-7" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>page</td>
+      <td>int</td>
+      <td>페이지 번호</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-7">Response<a class="anchorjs-link " href="#response-7" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>totalPage</td>
+      <td>총 페이지 수</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>nowPage</td>
+      <td>현재 페이지 번호</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>my_qna_list</td>
+      <td>나의 요청글 목록</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>qna_idx</td>
+      <td>요청글 순번</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>usernm</td>
+      <td>작성자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>industry_gubun_name</td>
+      <td>산업군</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>process_gubun_name</td>
+      <td>상세공정</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>broken_sh_name</td>
+      <td>고장상황</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>broken_hs_name</td>
+      <td>고장현상</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>제목</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>content</td>
+      <td>내용</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>job_dt</td>
+      <td>작성일시</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>finish_yn</td>
+      <td>채택여부</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>reply_count</td>
+      <td>답변수</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-7">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-7" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getMyDataQnaList</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">page</span><span class="p">:</span> <span class="dl">''</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/getMyDataQnaList</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+            
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="9-경험지식--고객센터-글-등록">9. 경험지식 – 고객센터 글 등록<a class="anchorjs-link " href="#9-경험지식--고객센터-글-등록" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-8">Request<a class="anchorjs-link " href="#request-8" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/insertDataHelp</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-8">Parameters<a class="anchorjs-link " href="#parameters-8" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>brdtitle</td>
+      <td>String</td>
+      <td>글 제목</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>brdmemo</td>
+      <td>String</td>
+      <td>글 내용</td>
+      <td style="text-align: center">O</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-8">Response<a class="anchorjs-link " href="#response-8" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-8">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-8" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">insertDataHelp</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">brdtitle</span><span class="p">:</span> <span class="dl">'</span><span class="s1">외부 문의 등록</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">brdmemo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">문의 내용</span><span class="dl">'</span>        
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/insertDataHelp</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">f</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>           
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="10-경험지식--고객센터-리스트-조회">10. 경험지식 – 고객센터 리스트 조회<a class="anchorjs-link " href="#10-경험지식--고객센터-리스트-조회" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-9">Request<a class="anchorjs-link " href="#request-9" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/getDataHelpList</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-9">Parameters<a class="anchorjs-link " href="#parameters-9" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>page</td>
+      <td>int</td>
+      <td>페이지 번호</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>keyword</td>
+      <td>String</td>
+      <td>검색어</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-9">Response<a class="anchorjs-link " href="#response-9" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>totalPage</td>
+      <td>총 페이지 수</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>nowPage</td>
+      <td>현재 페이지 번호</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>help_list</td>
+      <td>고객센터 글 목록</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>brdno</td>
+      <td>글 순번</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>brdtitle</td>
+      <td>글 제목</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>usernm</td>
+      <td>작성자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>brdhit</td>
+      <td>조회수</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>replycnt</td>
+      <td>답변수</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>brddate</td>
+      <td>작성일</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-9">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-9" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getDataHelpList</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">page</span><span class="p">:</span> <span class="dl">''</span><span class="p">,</span>
+        <span class="na">keyword</span><span class="p">:</span><span class="dl">''</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/getDataHelpList</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="11-경험지식--고객센터-글-상세-조회">11. 경험지식 – 고객센터 글 상세 조회<a class="anchorjs-link " href="#11-경험지식--고객센터-글-상세-조회" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-10">Request<a class="anchorjs-link " href="#request-10" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/getDataHelpOne</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-10">Parameters<a class="anchorjs-link " href="#parameters-10" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>brdno</td>
+      <td>String</td>
+      <td>글 번호</td>
+      <td style="text-align: center">O</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-10">Response<a class="anchorjs-link " href="#response-10" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>totalPage</td>
+      <td>총 페이지 수</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>nowPage</td>
+      <td>현재 페이지 번호</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>help_list</td>
+      <td>고객센터 글 목록</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>brdno</td>
+      <td>글 순번</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>brdtitle</td>
+      <td>글 제목</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>usernm</td>
+      <td>작성자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>brdhit</td>
+      <td>조회수</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>replycnt</td>
+      <td>답변수</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>brddate</td>
+      <td>작성일</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-10">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-10" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getDataHelpOne</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ. 
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">brdno</span><span class="p">:</span> <span class="dl">'</span><span class="s1">47</span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/getDataHelpOne</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>            
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>&nbsp; &nbsp; 
+&nbsp; &nbsp;</p>
+<h2 id="12-경험지식-요청글-리포트">12. 경험지식 요청글 리포트<a class="anchorjs-link " href="#12-경험지식-요청글-리포트" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<h3 id="request-11">Request<a class="anchorjs-link " href="#request-11" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/getDataQnaReport</code></p>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="parameters-11">Parameters<a class="anchorjs-link " href="#parameters-11" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+      <th style="text-align: center">필수여부</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>user_token</td>
+      <td>String</td>
+      <td>외부 사용자 인증키</td>
+      <td style="text-align: center">O</td>
+    </tr>
+    <tr>
+      <td>brdno</td>
+      <td>String</td>
+      <td>글 번호</td>
+      <td style="text-align: center">O</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="response-11">Response<a class="anchorjs-link " href="#response-11" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>이름</th>
+      <th>데이터명</th>
+      <th>유형</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>industry_gubun_name</td>
+      <td>산업군</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>process_gubun_name</td>
+      <td>상세공정</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model</td>
+      <td>모델명</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model_com</td>
+      <td>모델제조사</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model_create_dt</td>
+      <td>제조일자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>model_install_dt</td>
+      <td>설치일자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>mold_break_yn</td>
+      <td>금형파손여부</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>broken_sh_name</td>
+      <td>고장상황</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>broken_hs_name</td>
+      <td>고장현상</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>제목</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>content</td>
+      <td>내용</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>job_dt</td>
+      <td>작성일시</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>finish_yn</td>
+      <td>채택여부</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td><strong>fileList</strong></td>
+      <td><strong>첨부 파일 목록</strong></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>ata_org_name</td>
+      <td>파일 이름</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>ata_size</td>
+      <td>파일 크기</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>ata_path</td>
+      <td>다운로드 주소</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>preview_url</td>
+      <td>미리보기 주소</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td><strong>qnaReply</strong></td>
+      <td><strong>채택된 답변</strong></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>reply_idx</td>
+      <td>답변 순번</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>content_reply</td>
+      <td>답변 내용</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>job_dt</td>
+      <td>답변 작성 일시</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>selected</td>
+      <td>채택 유무</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>usernm</td>
+      <td>답변 장성자</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>user_gubun_name</td>
+      <td>답변자 구분</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td><strong>replyFileList</strong></td>
+      <td><strong>답변 첨부 파일 목록</strong></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>rata_org_name</td>
+      <td>파일 이름</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>rata_size</td>
+      <td>파일 크기</td>
+      <td>int</td>
+    </tr>
+    <tr>
+      <td>rata_path</td>
+      <td>다운로드 주소</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>reply_preview_url</td>
+      <td>미리보기 주소</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>결과 안내문</td>
+      <td>String</td>
+    </tr>
+    <tr>
+      <td>result</td>
+      <td>결과 코드</td>
+      <td>int</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>&nbsp; &nbsp;</p>
+<h3 id="jquery-코드-샘플-11">Jquery 코드 샘플<a class="anchorjs-link " href="#jquery-코드-샘플-11" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getDataQnaReport</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span><span class="p">{</span>
+        <span class="na">user_token</span><span class="p">:</span><span class="dl">"</span><span class="s2">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+        eyJ1c2Vybm8iOjg1LCJ1c2VyaWQiOiJkbXRlazEwNiIsImlhdCI6MTY3MDk4MjY0MSwiZXhwIjoxNjc4NzU4NjQxfQ.
+        iWSLtvLgUFAw8ODaDDURcILvOqJEYnx5kjOd6AZhTg8</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">qna_idx</span><span class="p">:</span> <span class="mi">93</span>
+    <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+        <span class="na">url</span><span class="p">:</span> <span class="dl">"</span><span class="s2">https://{domain}/project9/getDataQnaReport</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">async</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="na">crossDomain</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">daraType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">contentType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">mimeType</span><span class="p">:</span> <span class="dl">"</span><span class="s2">text/plain</span><span class="dl">"</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="nx">search</span><span class="p">,</span>
+        <span class="na">success</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">){</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+
+      
+    </div>
+</body>
+
+</html>
