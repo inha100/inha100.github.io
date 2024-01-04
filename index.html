@@ -1,22 +1,22 @@
 <html>
 <head>
-<title>비대면 API</title>
+<title>API 서비스 기반의 물류 데이터 동기화 클라우드 플랫폼</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <div class="container-lg px-3 my-5 markdown-body">
 
 
-      <h1 id="설비-보전-경험-지식-공유-플랫폼-api">설비 보전 경험 지식 공유 플랫폼 API</h1>
+      <h1 id="설비-보전-경험-지식-공유-플랫폼-api">API 서비스 기반의 물류 데이터 동기화 클라우드 플랫폼</h1>
 <p>&nbsp; &nbsp; 
 &nbsp; &nbsp; 
 &nbsp; &nbsp;</p>
 
-<h2 id="1-경험지식-요청-리스트-전체-조회">1. 경험지식 요청 리스트 전체 조회<a class="anchorjs-link " href="#1-경험지식-요청-리스트-전체-조회" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+<h2 id="1-경험지식-요청-리스트-전체-조회">1. 발주정보 조회<a class="anchorjs-link " href="#발주정보조회" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
 
 <h3 id="request">Request<a class="anchorjs-link " href="#request" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
 
-<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/project9/getDataQnaListAll</code></p>
+<p><code class="language-plaintext highlighter-rouge">GET https://{domain}/api/Nfa/GetPurchaseOrderList</code></p>
 
 <p>&nbsp; &nbsp;</p>
 <h3 id="parameters">Parameters<a class="anchorjs-link " href="#parameters" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
@@ -32,41 +32,24 @@
   </thead>
   <tbody>
     <tr>
-      <td>user_token</td>
+      <td>cust_cd</td>
       <td>String</td>
-      <td>외부 사용자 인증키</td>
+      <td>거래처코드</td>
+      <td style="text-align: center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>start_dt</td>
+      <td>Datetime</td>
+      <td>조회시작일자</td>
       <td style="text-align: center">O</td>
     </tr>
     <tr>
-      <td>keyword</td>
-      <td>String</td>
-      <td>검색어</td>
-      <td style="text-align: center">&nbsp;</td>
+      <td>end_dt</td>
+      <td>Datetime</td>
+      <td>조회종료일자</td>
+      <td style="text-align: center">O</td>
     </tr>
-    <tr>
-      <td>industry_gubun</td>
-      <td>String</td>
-      <td>산업군</td>
-      <td style="text-align: center">&nbsp;</td>
-    </tr>
-    <tr>
-      <td>process_gubun</td>
-      <td>String</td>
-      <td>상세 공정</td>
-      <td style="text-align: center">&nbsp;</td>
-    </tr>
-    <tr>
-      <td>broken_sh</td>
-      <td>String</td>
-      <td>고장 상황</td>
-      <td style="text-align: center">&nbsp;</td>
-    </tr>
-    <tr>
-      <td>broken_hs</td>
-      <td>String</td>
-      <td>고장 현상</td>
-      <td style="text-align: center">&nbsp;</td>
-    </tr>
+    
   </tbody>
 </table>
 
